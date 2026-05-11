@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoq Hanoi Hotel - Boutique Luxury</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --gold: #c5a059;
+            --dark: #1a1a1a;
+            --light-bg: #fdfbf7;
+            --text-gray: #777;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--dark);
+            background-color: #fff;
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, .serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 25px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: 0.4s;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
+        }
+
+        nav.scrolled {
+            background: var(--dark);
+            padding: 15px 50px;
+        }
+
+        .logo {
+            color: #fff;
+            font-size: 28px;
+            text-decoration: none;
+            letter-spacing: 5px;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .btn-book {
+            border: 1px solid #fff;
+            padding: 10px 10px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .btn-book:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                        url('./image/background.avif') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            
+        }
+
+        .hero h1 {
+            font-size: 70px;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        .hero p {
+            font-size: 14px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+        .hero a{
+            color: white;
+        }
+
+        /* --- INTRODUCTION --- */
+        .intro {
+            padding: 100px 10%;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .intro h2 {
+            font-size: 40px;
+            margin-bottom: 30px;
+            color: var(--gold);
+        }
+
+        .intro p {
+            color: var(--text-gray);
+            font-size: 16px;
+        }
+
+        /* --- SECTIONS (IMAGE + TEXT) --- */
+        .split-section {
+            display: flex;
+            align-items: center;
+            min-height: 600px;
+        }
+
+        .split-section.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .split-image {
+            flex: 1;
+            height: 600px;
+            overflow: hidden;
+        }
+
+        .split-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 1s;
+        }
+
+        .split-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .split-content {
+            flex: 1;
+            padding: 80px;
+            background-color: var(--light-bg);
+        }
+
+        .split-content h3 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .divider {
+            width: 50px;
+            height: 2px;
+            background: var(--gold);
+            margin-bottom: 25px;
+        }
+        /* Tien ich AMENITIES*/
+        /* --- FOOTER --- */
+        footer {
+            background: var(--dark);
+            color: #fff;
+            padding: 80px 10% 30px;
+            text-align: center;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 50px;
+            margin-bottom: 50px;
+            text-align: left;
+        }
+
+        .footer-logo {
+            letter-spacing: 5px;
+            font-size: 24px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .footer-col h4 {
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .footer-col p, .footer-col a {
+            color: #bbb;
+            font-size: 13px;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 768px) {
+            nav { padding: 20px; }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 40px; }
+            .split-section { flex-direction: column !important; }
+            .split-content { padding: 40px 20px; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <a href="#" class="logo">HOQ</a>
+        <div class="nav-links">
+            <a href="./index.html">Trang chủ</a>
+            <a href="./phongnghi.html">Phòng nghỉ</a>
+            <a href="">Dịch vụ</a>
+            <a href="#">Hình ảnh</a>
+            <a href="./lienhe.html">Liên hệ</a>
+        </div>
+        <div>
+            <a href="#" class="btn-book">ĐẶT PHÒNG</a>
+            <a href="#" class="btn-book">Đăng nhập</a>
+        </div>
+        
+    </nav>
+
+    <section class="hero">
+        <p>Kiến trúc tinh hoa giữa lòng thủ đô</p>
+        <h1>Hoq Hanoi</h1>
+        <div style="margin-top: 30px;">
+            <a href="#first"><i class="fa-solid fa-chevron-down" style="font-size: 20px; opacity: 0.7;"></i></a>
+        </div>
+    </section>
+
+    <section class="intro" id="first">
+        <h2>Chào mừng đến với HOQ</h2>
+        <p>Lấy cảm hứng từ những ngôi nhà truyền thống của vùng Ma-rốc kết hợp hài hòa với nét văn hóa Á Đông, Riad Hanoi mang đến một không gian lưu trú biệt lập, sang trọng và đầy cảm xúc cho những tâm hồn tìm kiếm sự yên bình.</p>
+    </section>
+
+    <section class="split-section" >
+        <div class="split-image" >
+            <img src="./image/trangchu1.avif" alt="Phòng ngủ">
+        </div>
+        <div class="split-content">
+            <div class="divider"></div>
+            <h3>Nghệ Thuật Nghỉ Dưỡng</h3>
+            <p>Mỗi căn phòng tại HOQ là một tác phẩm nghệ thuật riêng biệt, nơi ánh sáng và bóng đổ hòa quyện cùng chất liệu gỗ tự nhiên và gốm thủ công.</p>
+            <a href="phongnghi.html" style="color: var(--gold); text-decoration: none; font-size: 12px; font-weight: 600; margin-top: 20px; display: inline-block; letter-spacing: 2px;">XEM CHI TIẾT →</a>
+        </div>
+    </section>
+    <section class="split-section reverse">
+        <div class="split-image">
+            <img src="./image/food2.avif" alt="Ẩm thực">
+        </div>
+        <div class="split-content">
+            <div class="divider"></div>
+            <h3>Ẩm Thực Đa Dạng</h3>
+            <p>Trải nghiệm tinh hoa ẩm thực với những món ăn được chế biến tinh tế, nơi hương vị, nghệ thuật và cảm xúc hòa quyện tạo nên hành trình vị giác đầy ấn tượng.</p>
+            <a href="#" style="color: var(--gold); text-decoration: none; font-size: 12px; font-weight: 600; margin-top: 20px; display: inline-block; letter-spacing: 2px;">KHÁM PHÁ ẨM THỰC →</a>
+        </div>
+    </section>
+    <section class="split-section">
+        <div class="split-image">
+            <img src="./image/trangchu2.avif" alt="Spa">
+        </div>
+        <div class="split-content">
+            <div class="divider"></div>
+            <h3>Thư Giãn Tuyệt Đối</h3>
+            <p>Tận hưởng dịch vụ Spa và chăm sóc sức khỏe mang phong cách thiền định, giúp bạn tái tạo năng lượng sau một ngày dài khám phá Hà Nội phố.</p>
+            <a href="#" style="color: var(--gold); text-decoration: none; font-size: 12px; font-weight: 600; margin-top: 20px; display: inline-block; letter-spacing: 2px;">KHÁM PHÁ SPA →</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <span class="footer-logo">HOQ</span>
+                <p>Khách sạn Boutique hàng đầu tại Hà Nội.</p>
+                <div style="font-size: 18px; margin-top: 20px;">
+                    <i class="fab fa-facebook-f" style="margin-right: 15px;"></i>
+                    <i class="fab fa-instagram" style="margin-right: 15px;"></i>
+                    <i class="fab fa-tripadvisor"></i>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>LIÊN HỆ</h4>
+                <p>Địa chỉ: 123 Phố Cổ, Hoàn Kiếm, Hà Nội</p>
+                <p>Hotline: +84 987 654 321</p>
+                <p>Email: info@hoq-hanoi.com</p>
+            </div>
+            <div class="footer-col">
+                <h4>LIÊN KẾT</h4>
+                <a href="#">Điều khoản sử dụng</a>
+                <a href="#">Chính sách bảo mật</a>
+                <a href="#">Tuyển dụng</a>
+            </div>
+        </div>
+        <hr style="border: 0; border-top: 1px solid #333; margin-bottom: 20px;">
+        <p style="font-size: 11px; color: #666;">© 2026 HOQ HANOI. Thiết kế bởi HOQ.</p>
+    </footer>
+
+    <script>
+        window.onscroll = function() {
+            var nav = document.getElementById('navbar');
+            if (window.pageYOffset > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        };
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoq Hanoi Hotel - Boutique Luxury</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --gold: #c5a059;
+            --dark: #1a1a1a;
+            --light-bg: #fdfbf7;
+            --text-gray: #777;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--dark);
+            background-color: #fff;
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, .serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 25px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: 0.4s;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
+        }
+
+        nav.scrolled {
+            background: var(--dark);
+            padding: 15px 50px;
+        }
+
+        .logo {
+            color: #fff;
+            font-size: 28px;
+            text-decoration: none;
+            letter-spacing: 5px;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .btn-book {
+            border: 1px solid #fff;
+            padding: 10px 10px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .btn-book:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero-banner {
+            height: 45vh;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                        url('./image/background2.avif') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--white);
+            text-align: center;
+            margin-top: 70px; /* Bù cho navbar cố định */
+        }
+
+        .hero-banner h1 {
+            font-size: 50px;
+            margin-bottom: 10px;
+            font-weight: 400;
+        }
+
+        /* --- DANH SÁCH PHÒNG (GRID) --- */
+        .rooms-section {
+            padding: 80px 10%;
+            background-color: var(--bg-light);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .room-card {
+            background: var(--white);
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.4s ease;
+        }
+
+        .room-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .room-img {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .room-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .room-card:hover .room-img img {
+            transform: scale(1.1);
+        }
+
+        .room-info {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .room-info h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        /* xem them */
+        .view-more-wrapper {
+            text-align: center;
+            margin-top: 60px;
+            position: relative;
+        }
+        .btn-view-more {
+            position: relative;
+            z-index: 2;
+            background: var(--white);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 15px 40px;
+            font-size: 12px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.4s;
+            display: inline-block;
+        }
+        .btn-view-more:hover {
+            background: var(--gold);
+            color: var(--white);
+            box-shadow: 0 10px 20px rgba(197, 160, 89, 0.2);
+        }
+        /* Icon tiện ích */
+        .amenities-icons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 20px;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+        }
+
+        .item-icon {
+            font-size: 13px;
+            color: #777;
+        }
+
+        .item-icon i {
+            display: block;
+            color: var(--gold);
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .room-desc {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 25px;
+            height: 65px;
+            overflow: hidden;
+        }
+
+        /* Buttons */
+        .card-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .btn-outline {
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            background: var(--gold);
+        }
+
+        .btn-solid {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-solid:hover {
+            background: var(--gold);
+        }
+        /* --- FOOTER --- */
+        footer {
+            background: var(--dark);
+            color: #fff;
+            padding: 80px 10% 30px;
+            text-align: center;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 50px;
+            margin-bottom: 50px;
+            text-align: left;
+        }
+
+        .footer-logo {
+            letter-spacing: 5px;
+            font-size: 24px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .footer-col h4 {
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .footer-col p, .footer-col a {
+            color: #bbb;
+            font-size: 13px;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+
+        /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 768px) {
+            nav { padding: 20px; }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 40px; }
+            .split-section { flex-direction: column !important; }
+            .split-content { padding: 40px 20px; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <a href="#" class="logo">HOQ</a>
+        <div class="nav-links">
+            <a href="./index.html">Trang chủ</a>
+            <a href="./phongnghi.html">Phòng nghỉ</a>
+            <a href="#">Dịch vụ</a>
+            <a href="#">Hình ảnh</a>
+            <a href="./lienhe.html">Liên hệ</a>
+        </div>
+        <div>
+            <a href="#" class="btn-book">Lich sử đặt phòng</a>
+            <a href="#" class="btn-book">Đăng nhập</a>
+        </div>
+        
+    </nav>
+
+   <header class="hero-banner">
+        <h1>Không Gian Nghỉ Dưỡng</h1>
+        <p class="breadcrumb">Trang chủ / Phòng nghỉ</p>
+    </header>
+
+    <section class="rooms-section">
+        <div class="section-title">
+            <h2>Hệ thống phòng nghỉ</h2>
+            <p>Nơi cảm xúc được thăng hoa giữa thiên nhiên</p>
+        </div>
+
+        <div class="rooms-grid">
+            
+            <div class="room-card">
+                <div class="room-img">
+                    <img src="./image/phong1.avif" alt="Phòng Deluxe">
+                </div>
+                <div class="room-info">
+                    <h3>Alocasia Deluxe</h3>
+                    <div class="amenities-icons">
+                        <div class="item-icon">
+                            <i class="fas fa-expand"></i> 35m²
+                        </div>
+                        <div class="item-icon">
+                            <i class="fas fa-bed"></i> King Bed
+                        </div>
+                        <div class="item-icon">
+                            <i class="fas fa-mountain"></i> View Núi
+                        </div>
+                    </div>
+                    <p class="room-desc">Tận hưởng không gian sang trọng với ban công riêng hướng tầm mắt ra thung lũng xanh mướt.</p>
+                    <div class="card-actions">
+                        <a href="chitiet.html" class="btn btn-outline">Chi tiết</a>
+                        <a href="datphong.html" class="btn btn-solid">Đặt phòng</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="room-card">
+                <div class="room-img">
+                    <img src="./image/phong2.avif" alt="Phòng Suite">
+                </div>
+                <div class="room-info">
+                    <h3>Classy Suite</h3>
+                    <div class="amenities-icons">
+                        <div class="item-icon">
+                            <i class="fas fa-expand"></i> 55m²
+                        </div>
+                        <div class="item-icon">
+                            <i class="fas fa-users"></i> 4 Khách
+                        </div>
+                        <div class="item-icon">
+                            <i class="fas fa-bath"></i> Tub Bath
+                        </div>
+                    </div>
+                    <p class="room-desc">Sự lựa chọn hoàn hảo cho gia đình với thiết kế hiện đại và đầy đủ tiện nghi cao cấp nhất.</p>
+                    <div class="card-actions">
+                        <a href="chitiet.html" class="btn btn-outline">Chi tiết</a>
+                        <a href="datphong.html" class="btn btn-solid">Đặt phòng</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="room-card">
+                <div class="room-img">
+                    <img src="./image/phong3.avif" alt="Phòng Premiere">
+                </div>
+                <div class="room-info">
+                    <h3>Amour Premiere</h3>
+                    <div class="amenities-icons">
+                        <div class="item-icon">
+                            <i class="fas fa-expand"></i> 45m²
+                        </div>
+                        <div class="item-icon">
+                            <i class="fas fa-bed"></i> Queen Bed
+                        </div>
+                        <div class="item-icon">
+                            <i class="fas fa-wifi"></i> Free Wifi
+                        </div>
+                    </div>
+                    <p class="room-desc">Căn phòng lãng mạn nhất dành cho các cặp đôi trong kỳ nghỉ trăng mật đầy cảm xúc.</p>
+                    <div class="card-actions">
+                        <a href="chitiet.html" class="btn btn-outline">Chi tiết</a>
+                        <a href="datphong.html" class="btn btn-solid">Đặt phòng</a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="rooms-grid">
+            
+            <div class="room-card">
+                <div class="room-img">
+                    <img src="./image/phong1.avif" alt="Phòng Deluxe">
+                </div>
+                <div class="room-info">
+                    <h3>Alocasia Deluxe</h3>
+                    <div class="amenities-icons">
+                        <div class="item-icon">
+                            <i class="fas fa-expand"></i> 35m²
+                        </div>
+                        <div class="item-icon">
+                            <i class="fas fa-bed"></i> King Bed
+                        </div>
+                        <div class="item-icon">
+                            <i class="fas fa-mountain"></i> View Núi
+                        </div>
+                    </div>
+                    <p class="room-desc">Tận hưởng không gian sang trọng với ban công riêng hướng tầm mắt ra thung lũng xanh mướt.</p>
+                    <div class="card-actions">
+                        <a href="chitiet.html" class="btn btn-outline">Chi tiết</a>
+                        <a href="datphong.html" class="btn btn-solid">Đặt phòng</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="room-card">
+                <div class="room-img">
+                    <img src="./image/phong2.avif" alt="Phòng Suite">
+                </div>
+                <div class="room-info">
+                    <h3>Classy Suite</h3>
+                    <div class="amenities-icons">
+                        <div class="item-icon">
+                            <i class="fas fa-expand"></i> 55m²
+                        </div>
+                        <div class="item-icon">
+                            <i class="fas fa-users"></i> 4 Khách
+                        </div>
+                        <div class="item-icon">
+                            <i class="fas fa-bath"></i> Tub Bath
+                        </div>
+                    </div>
+                    <p class="room-desc">Sự lựa chọn hoàn hảo cho gia đình với thiết kế hiện đại và đầy đủ tiện nghi cao cấp nhất.</p>
+                    <div class="card-actions">
+                        <a href="chitiet.html" class="btn btn-outline">Chi tiết</a>
+                        <a href="datphong.html" class="btn btn-solid">Đặt phòng</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="room-card">
+                <div class="room-img">
+                    <img src="./image/phong3.avif" alt="Phòng Premiere">
+                </div>
+                <div class="room-info">
+                    <h3>Amour Premiere</h3>
+                    <div class="amenities-icons">
+                        <div class="item-icon">
+                            <i class="fas fa-expand"></i> 45m²
+                        </div>
+                        <div class="item-icon">
+                            <i class="fas fa-bed"></i> Queen Bed
+                        </div>
+                        <div class="item-icon">
+                            <i class="fas fa-wifi"></i> Free Wifi
+                        </div>
+                    </div>
+                    <p class="room-desc">Căn phòng lãng mạn nhất dành cho các cặp đôi trong kỳ nghỉ trăng mật đầy cảm xúc.</p>
+                    <div class="card-actions">
+                        <a href="chitiet.html" class="btn btn-outline">Chi tiết</a>
+                        <a href="datphong.html" class="btn btn-solid">Đặt phòng</a>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+        <div class="view-more-wrapper">
+            <a href="#" class="btn-view-more">XEM THÊM-></a>
+        </div>
+    </section>
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <span class="footer-logo">HOQ</span>
+                <p>Khách sạn Boutique hàng đầu tại Hà Nội.</p>
+                <div style="font-size: 18px; margin-top: 20px;">
+                    <i class="fab fa-facebook-f" style="margin-right: 15px;"></i>
+                    <i class="fab fa-instagram" style="margin-right: 15px;"></i>
+                    <i class="fab fa-tripadvisor"></i>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>LIÊN HỆ</h4>
+                <p>Địa chỉ: 123 Phố Cổ, Hoàn Kiếm, Hà Nội</p>
+                <p>Hotline: +84 987 654 321</p>
+                <p>Email: info@hoq-hanoi.com</p>
+            </div>
+            <div class="footer-col">
+                <h4>LIÊN KẾT</h4>
+                <a href="#">Điều khoản sử dụng</a>
+                <a href="#">Chính sách bảo mật</a>
+                <a href="#">Tuyển dụng</a>
+            </div>
+        </div>
+        <hr style="border: 0; border-top: 1px solid #333; margin-bottom: 20px;">
+        <p style="font-size: 11px; color: #666;">© 2026 HOQ HANOI. Thiết kế bởi HOQ.</p>
+    </footer>
+
+    <script>
+        window.onscroll = function() {
+            var nav = document.getElementById('navbar');
+            if (window.pageYOffset > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        };
+    </script>
+
+</body>
+</html>
